@@ -1,10 +1,15 @@
 import argparse
+import pypdfchptsplit.pdfsplit as pdfsplit
 
 
 def parse_arguments():
     """Parses commands line options"""
     parser = argparse.ArgumentParser(
         description='Program to split PDF book into chapters'
+    )
+    parser.add_argument(
+        'file', type=int,
+        help='Path to the PDF file to be split'
     )
     parser.add_argument(
         'pages', nargs='+', type=int,
@@ -18,7 +23,4 @@ def process_commands():
     # Parse and handle each different command
     args = parse_arguments()
 
-    # Remove duplicates and sort
-    split_pages = sorted(set(args.pages))
-    print(split_pages)
-
+    pdfsplit.pdf_split(args.file, args.pages)
