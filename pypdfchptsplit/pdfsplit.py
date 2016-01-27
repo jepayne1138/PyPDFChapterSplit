@@ -3,14 +3,14 @@ from bisect import bisect_right
 import PyPDF2
 
 
-def pdf_split(filename, pages):
+def pdf_split(filename, pages, offset=0):
     """Splits the given file into chapters at the given pages"""
     # Load the PDF file
     with open(filename, 'rb') as pdf_file_obj:
         pdf = PyPDF2.PdfFileReader(pdf_file_obj)
 
         # Clean pages iterable; make sure no dupes, sorted, and in valid range
-        clean_pages = sorted(map(lambda x: x-1, set(pages)))
+        clean_pages = sorted(map(lambda x: (x-1+offset), set(pages)))
         if clean_pages[-1] >= pdf.numPages or clean_pages[0] < 0:
             raise ValueError('Pages outside of vaild range for the given PDF.')
 

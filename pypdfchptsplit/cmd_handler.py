@@ -15,6 +15,10 @@ def parse_arguments():
         'pages', nargs='+', type=int,
         help='Space delimited list of the fist page of each chapter'
     )
+    parser.add_argument(
+        '-o', '--offset', type=int, default=0,
+        help='Offset applied to all page numbers (line up Index with PDF pages)'
+    )
     return parser.parse_args()
 
 
@@ -23,4 +27,4 @@ def process_commands():
     # Parse and handle each different command
     args = parse_arguments()
 
-    pdfsplit.pdf_split(args.file, args.pages)
+    pdfsplit.pdf_split(args.file, args.pages, args.offset)
