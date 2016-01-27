@@ -8,7 +8,7 @@ def parse_arguments():
         description='Program to split PDF book into chapters'
     )
     parser.add_argument(
-        'file', type=int,
+        'file', type=str,
         help='Path to the PDF file to be split'
     )
     parser.add_argument(
